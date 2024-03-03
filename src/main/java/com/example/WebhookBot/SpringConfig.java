@@ -1,9 +1,12 @@
 package com.example.WebhookBot;
 
 import lombok.AllArgsConstructor;
+import org.jsoup.Jsoup;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
+
+import java.io.IOException;
 
 @Configuration
 @AllArgsConstructor
