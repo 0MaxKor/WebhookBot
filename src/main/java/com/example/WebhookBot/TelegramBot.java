@@ -22,11 +22,13 @@ public class TelegramBot extends SpringWebhookBot {
     String botPath;
     String botUsername;
     String botToken;
+    UpdateHandler updateHandler;
 
 
 
     public TelegramBot(SetWebhook setWebhook) {
         super(setWebhook);
+        updateHandler = new UpdateHandler(this);
     }
 
     @Override
@@ -49,14 +51,7 @@ public class TelegramBot extends SpringWebhookBot {
         } else {
             Message message = update.getMessage();
             if (message != null) {
-                SendMessage sendMessage = new SendMessage();
-                sendMessage.setChatId(message.getChatId());
-                sendMessage.setText("hellowh");
-                try {
-                    this.execute(sendMessage);
-                } catch (TelegramApiException e) {
-                    System.err.println(e.getMessage());
-                }
+                updateHandler.handleMessage(message);
             }
         }
         return null;
